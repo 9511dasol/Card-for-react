@@ -1,4 +1,4 @@
-# Card Recommendation Homepage for react
+# Card Recommendation Homepage by react
 카드 추천 홈페이지
 
 [demo](https://9511dasol.github.io/Card-for-react/)
