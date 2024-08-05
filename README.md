@@ -2,23 +2,20 @@
 카드 추천 홈페이지
 
 ## 프로젝트 소개 🖥️
-자연어 처리를 활용하여 만든 카드 추천 홈페이지 입니다.
+리액트, 리덕스를 활용하여 만든 카드 추천 홈페이지 입니다.
 
-2024.08.05 ~  React, TypeScript, Redux +@를 이용하여 프론트엔드 위주로 사이트 개편예정
 ## 개발 기간 ⏱️
-23.03.10 - 23.12.16
+24.08.05 - ing
 
 24.08 - ing(예정)
 ### 맴버 구성 🧑‍🤝‍🧑
-- 한다솔: 프론트앤드(메인), 백앤드(보조, 자연어처리, 데이터베이스, 서버 담당)
-- 우재현: 백엔드(특정 커뮤니티 게시글, 댓글 크롤링)
+- 한다솔: 프론트앤드
 
 ### 개발 환경 ⚙️
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=for-the-badge&logo=TensorFlow&logoColor=white)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
 
-![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
