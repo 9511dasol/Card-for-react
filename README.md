@@ -1,46 +1,70 @@
-# Getting Started with Create React App
+# Card Recommendation Homepage for react
+카드 추천 홈페이지
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 프로젝트 소개 🖥️
+자연어 처리를 활용하여 만든 카드 추천 홈페이지 입니다.
 
-## Available Scripts
+2024.08.05 ~  React, TypeScript, Redux +@를 이용하여 프론트엔드 위주로 사이트 개편예정
+## 개발 기간 ⏱️
+23.03.10 - 23.12.16
 
-In the project directory, you can run:
+24.08 - ing(예정)
+### 맴버 구성 🧑‍🤝‍🧑
+- 한다솔: 프론트앤드(메인), 백앤드(보조, 자연어처리, 데이터베이스, 서버 담당)
+- 우재현: 백엔드(특정 커뮤니티 게시글, 댓글 크롤링)
 
-### `npm start`
+### 개발 환경 ⚙️
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=for-the-badge&logo=TensorFlow&logoColor=white)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
-### `npm test`
+## 주요 기능 📌
+- 텐서플로우를 이용한 자연어 처리 모델 개발 - 특정 커뮤니티에 올라오는 게시글 댓글 학습
+- 최근(하루)에 많이 언급된 카드 순으로 나열해주는 알고리즘 구현
+- 특정 카드 url을 넣으면 카드 이름, 혜택, 연회비 등 정보를 자동으로 가져오는 크롤링&알고리즘 구현
+- 포인트 / 할인 카드 검색 기능 구현
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+# 주요 코드
+### Python
+    from tensorflow.keras.layers import Embedding, Dense, LSTM, GRU
+    from tensorflow.keras.models import Sequential
+    from tensorflow.keras.callbacks import EarlyStopping
+    embedding_size = 248# 일반적으로 100에서 300
+    es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=4, restore_best_weights=True)
+    model = Sequential()
+    # 임베딩층 추가
+    model.add(Embedding(input_dim=num_words,      # 사용하는 단어의 개수
+                        output_dim=embedding_size,# 임베딩 차원
+                        input_length=max_tokens,  # 리뷰의 길이
+                        name='layer_embedding'))
+    model.add(LSTM(units=256)) # GRU나 LSTM 사용 (여기에서는 LSTM이 좀 더 좋은 성능을 보이는 것 같음)
+    model.add(Dense(1, activation='sigmoid'))
+    model.compile(optimizer='rmsprop', loss='binary_crossentropy', metrics=['acc'])
+    model.fit(X_train, y_train, epochs=10000, callbacks=es, batch_size=64, validation_split=0.2)
+    def sentiment_predict(new_sentence):
+      new_sentence = re.sub(r'[^ㄱ-ㅎㅏ-ㅣ가-힣 ]','', new_sentence) # 한글과 공백만 남기기
+      new_sentence = okt.morphs(new_sentence, stem=True) # 형태소 분석
+      new_sentence = [word for word in new_sentence if not word in stopwords] # 불용어 제거
+      encoded = tokenizer.texts_to_sequences([new_sentence]) # 토큰화
+      pad_new = pad_sequences(encoded, maxlen = max_tokens) # 패딩
+      score = float(model.predict(pad_new)) # 예측
+      if(score > 0.5):
+        print("{:.2f}% 확률로 긍정 글입니다.\n".format(score * 100))
+      else:
+        print("{:.2f}% 확률로 부정 글입니다.\n".format((1 - score) * 100))
+    sentiment_predict('레이디 클레식 카드 좋다~~') # 95.01% 확률로 긍정 글입니다.
+    sentiment_predict('더모아 사기네 ?') # 95.01% 확률로 긍정 글입니다.
+### jQuery
+    let innate_number = $(button).parents('#id or .class'). - 부모의 값 가져요기
+    let innate_number = $(button).siblings('.IN').text(); # 자기 형제
+    let innate_number = $(button).attr('value') # 속성 값 # 자기 자신 속성값
+    let innate_number = $(button).text() # 자시 자신 text
+    
