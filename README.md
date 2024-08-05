@@ -1,6 +1,7 @@
 # Card Recommendation Homepage for react
 카드 추천 홈페이지
 
+[demo](https://9511dasol.github.io/Card-for-react/)
 ## 프로젝트 소개 🖥️
 리액트, 리덕스를 활용하여 만든 카드 추천 홈페이지 입니다.
 
