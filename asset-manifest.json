@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Card-for-react/static/css/main.7dab206e.css",
-    "main.js": "/Card-for-react/static/js/main.1890e3f1.js",
+    "main.js": "/Card-for-react/static/js/main.445158ea.js",
     "static/media/boxicons.svg": "/Card-for-react/static/media/boxicons.9e2b21b135bc7d4c803f.svg",
     "static/media/boxicons.eot": "/Card-for-react/static/media/boxicons.65a8ce52fc5427e8f94d.eot",
     "static/media/boxicons.woff": "/Card-for-react/static/media/boxicons.d12afc36557395143e4b.woff",
@@ -13,10 +13,10 @@
     "static/media/slick.woff": "/Card-for-react/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/Card-for-react/index.html",
     "main.7dab206e.css.map": "/Card-for-react/static/css/main.7dab206e.css.map",
-    "main.1890e3f1.js.map": "/Card-for-react/static/js/main.1890e3f1.js.map"
+    "main.445158ea.js.map": "/Card-for-react/static/js/main.445158ea.js.map"
   },
   "entrypoints": [
     "static/css/main.7dab206e.css",
-    "static/js/main.1890e3f1.js"
+    "static/js/main.445158ea.js"
   ]
 }
