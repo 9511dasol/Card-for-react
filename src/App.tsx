@@ -20,7 +20,7 @@ function App() {
     <Router basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/" element={<Homepage />}>
-        {/* 유저 모드 */}
+          {/* 유저 모드 */}
           <Route index element={<Usermain />} />
           <Route path="/findcard" element={<Findcard />} />
           <Route path="/recommnad" element={<Recommand />} />

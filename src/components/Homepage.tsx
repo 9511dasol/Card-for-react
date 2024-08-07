@@ -6,6 +6,7 @@ import Main from "./managerPage/Main";
 import Navbar from "./managerPage/Navbar";
 import Findcard from "./userPage/Findcard";
 import { Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Home = styled.div`
   display: flex;
@@ -83,13 +84,13 @@ function Homepage() {
           <Footer_menu>
             <ul>
               <li>
-                <a href="#">Home</a>
+                <Link to={"/"}>Home</Link>
               </li>
               <li>
                 <a href="#">인기카드</a>
               </li>
               <li>
-                <a href="#">카드 찾기</a>
+                <Link to={"findcard"}>카드 찾기</Link>
               </li>
               <li>
                 <a href="#">개발자 카드 추천</a>
