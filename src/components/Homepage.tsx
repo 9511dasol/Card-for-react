@@ -4,26 +4,30 @@ import Unavbar from "./userPage/Unavbar";
 import Usermain from "./userPage/Usermain";
 import Main from "./managerPage/Main";
 import Navbar from "./managerPage/Navbar";
+import Findcard from "./userPage/Findcard";
+import { Outlet } from "react-router-dom";
 
 const Home = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100%;
 `;
 
 const Navbars = styled.div``;
 
-const Content = styled.div``;
+const Content = styled.div`
+  min-height: 90vh;
+`;
 
 const Footer = styled.div`
   width: 100%;
   height: 21vh;
   display: flex;
-  justify-content: center;
   align-items: center;
   justify-content: space-around;
   background-color: #263343;
   color: #fff;
-  padding: 50px 0px 50px 0px;
+  padding: 25px 0 0 0;
 `;
 
 const Footer__ma = styled.div`
@@ -40,6 +44,7 @@ const Footer_menu = styled.div`
   ul {
     display: flex;
     flex-direction: column;
+    padding: 0 0 0 2px;
     li {
       margin-top: 2px;
       a {
@@ -56,11 +61,14 @@ const Footer_menu = styled.div`
 `;
 
 function Homepage() {
-  const [state, setState] = useState<boolean>(true);
   return (
-    <Home>
-      <Navbars>{state ? <Unavbar /> : <Navbar />}</Navbars>
-      <Content>{state ? <Usermain /> : <Main />}</Content>
+    <div className="home">
+      <Navbars>
+        <Unavbar />
+      </Navbars>
+      <Content>
+        <Outlet />
+      </Content>
       <Footer>
         <Footer__ma>
           <Address_text>Made by</Address_text>
@@ -93,7 +101,7 @@ function Homepage() {
           </Footer_menu>
         </Footer__ma>
         <Footer__ma>
-          <Address_text>Impormation</Address_text>
+          <Address_text>Information</Address_text>
           <Footer_menu>
             <ul>
               <li>E-mail: 9511dasole@gmail.com</li>
@@ -102,7 +110,7 @@ function Homepage() {
           </Footer_menu>
         </Footer__ma>
       </Footer>
-    </Home>
+    </div>
   );
 }
 

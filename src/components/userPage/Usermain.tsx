@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
+import "boxicons/css/boxicons.min.css";
 
 
 
@@ -42,6 +43,10 @@ const Card__info = styled.div`
 `;
 
 const News = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
   height: 60vh;
   width: 100%;
   background-color: #263343;
@@ -78,7 +83,7 @@ function Usermain() {
     <div>
       <Slider {...settings}>
         {CI.map((v, idx) => (
-          <Sliderbox>
+          <Sliderbox key={idx}>
             <Box>
               <Imgbox wl={v.wl}>
                 <img src={v.img} />
@@ -91,7 +96,7 @@ function Usermain() {
           </Sliderbox>
         ))}
       </Slider>
-      <News></News>
+      <News><span>News (공사중)</span></News>
     </div>
   );
 }

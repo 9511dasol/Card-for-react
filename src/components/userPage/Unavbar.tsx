@@ -1,27 +1,37 @@
 import React from "react";
 import styled from "styled-components";
 import "boxicons/css/boxicons.min.css";
+import { Link } from "react-router-dom";
 
 const Unav = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
-  padding: 20px;
+  padding: 15px 15px 0 15px;
   color: white;
   background-color: #263343;
+  a {
+    color: white;
+    text-decoration: none;
+  }
 `;
 
 const Unav__logo = styled.div`
   display: flex;
+  a {
+    display: flex;
+  }
   span {
-    margin-left: 6px;
+    margin: 0 0 0px 5px;
   }
 `;
 
 const Unav__menu = styled.div`
   ul {
     display: flex;
+    align-items: center;
+
     li {
       margin: 0 10px;
       cursor: pointer;
@@ -43,13 +53,17 @@ function Unavbar() {
   return (
     <Unav>
       <Unav__logo>
-        <i className="bx bxs-credit-card bx-sm bx-tada-hover" />
-        <span style={{ fontSize: "18px" }}>Card</span>
+        <Link to={"/"}>
+          <i className="bx bxs-credit-card bx-sm bx-tada-hover" />
+          <span style={{ fontSize: "18px" }}>Card</span>
+        </Link>
       </Unav__logo>
       <Unav__menu>
         <ul>
           <li onClick={() => alert("공사중")}>인기카드</li>
-          <li onClick={() => alert("공사중")}>카드 찾기</li>
+          <li>
+            <Link to={"Findcard"}>카드 찾기</Link>
+          </li>
           <li onClick={() => alert("공사중")}>개발자 카드 추천</li>
           <li onClick={() => alert("공사중")}>FAQ</li>
         </ul>
