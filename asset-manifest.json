@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Card-for-react/static/css/main.5fe3e46f.css",
-    "main.js": "/Card-for-react/static/js/main.4f0c29aa.js",
+    "main.js": "/Card-for-react/static/js/main.2f9a5f1a.js",
     "static/media/boxicons.svg": "/Card-for-react/static/media/boxicons.9e2b21b135bc7d4c803f.svg",
     "static/media/boxicons.eot": "/Card-for-react/static/media/boxicons.65a8ce52fc5427e8f94d.eot",
     "static/media/boxicons.woff": "/Card-for-react/static/media/boxicons.d12afc36557395143e4b.woff",
@@ -13,10 +13,10 @@
     "static/media/slick.woff": "/Card-for-react/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/Card-for-react/index.html",
     "main.5fe3e46f.css.map": "/Card-for-react/static/css/main.5fe3e46f.css.map",
-    "main.4f0c29aa.js.map": "/Card-for-react/static/js/main.4f0c29aa.js.map"
+    "main.2f9a5f1a.js.map": "/Card-for-react/static/js/main.2f9a5f1a.js.map"
   },
   "entrypoints": [
     "static/css/main.5fe3e46f.css",
-    "static/js/main.4f0c29aa.js"
+    "static/js/main.2f9a5f1a.js"
   ]
 }
