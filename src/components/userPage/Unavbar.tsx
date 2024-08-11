@@ -64,7 +64,7 @@ function Unavbar() {
           <li>
             <Link to={"Findcard"}>카드 찾기</Link>
           </li>
-          <li onClick={() => alert("공사중")}>개발자 카드 추천</li>
+          <li onClick={() => alert("개발중")}>개발자 카드 추천</li>
           <li><Link to={"faq"}>Faq</Link></li>
         </ul>
       </Unav__menu>
