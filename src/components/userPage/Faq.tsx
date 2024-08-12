@@ -1,6 +1,8 @@
 import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
 import "./Faq.css";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import UserContact from "./UserContact";
 
 interface category {
   name: string;
@@ -20,8 +22,8 @@ const categories: category[] = [
     value: "all",
   },
   {
-    name: "카테고리 1",
-    value: "category1",
+    name: "카드 추천 기준",
+    value: "Recommend",
   },
   {
     name: "카테고리 2",
@@ -36,9 +38,9 @@ const categories: category[] = [
 const qnaLists: qnaList[] = [
   {
     show: false,
-    category: "category1",
-    question: "what is that ? 1!",
-    answer: "this is react. 1!",
+    category: "Recommend",
+    question: "카드 추천에 대한 출처가 어디인가요 ?",
+    answer: "특정 커뮤니티입니다.",
   },
   {
     show: false,
@@ -54,7 +56,7 @@ const qnaLists: qnaList[] = [
   },
   {
     show: false,
-    category: "category1",
+    category: "Recommend",
     question: "what is that ? 4!",
     answer: "this is react. 4!",
   },
@@ -89,11 +91,13 @@ const Faqq = styled.div`
 const Q = styled.div`
   display: flex;
   justify-content: center;
-  align-items:center;
+  align-items: center;
   min-height: 33.9vh;
   width: 100%;
-  position: absolute;
-  bottom: 0px;
+`;
+
+const MinFaq = styled.div`
+  min-height: 57vh;
 `;
 
 function CategoryFilter({ categories, category, setCatecory }: props) {
@@ -128,7 +132,13 @@ function CategoryFilter({ categories, category, setCatecory }: props) {
 function Faq() {
   const [category, setCatecory] = useState<string>("all");
   const [list, SetList] = useState<qnaList[]>(qnaLists);
+  const [contact, SetContact] = useState<boolean>(true);
+  const [confaq, Setconfaq] = useState<string>("1:1 문의하기");
 
+  const click = () => {
+    SetContact(!contact);
+    Setconfaq(() => (contact ? "1:1 문의하기" : "FAQ"));
+  };
   useEffect(() => {
     SetList(
       qnaLists.filter((item) => {
@@ -169,21 +179,38 @@ function Faq() {
 
   return (
     <Faqq>
-      <CategoryFilter
-        categories={categories}
-        category={category}
-        setCatecory={setCatecory}
-      />
-      {/* 카테고리 만들기 */}
-      <div className="fqa-parent">
-        <div className="faq-list">
-          {list.map((item, index) => getQnACard(item, index))}
-        </div>
-      </div>
-      {/* 질문 리스트 만듥 */}
-      <Q>1:1 문의하기</Q>
+      {contact ? (
+        <MinFaq>
+          <CategoryFilter
+            categories={categories}
+            category={category}
+            setCatecory={setCatecory}
+          />
+          {/* 카테고리 만들기 */}
+          <div className="fqa-parent">
+            <div className="faq-list">
+              {list.map((item, index) => getQnACard(item, index))}
+            </div>
+          </div>
+          {/* 질문 리스트 만듥 */}
+        </MinFaq>
+      ) : (
+        <UserContact />
+      )}
+
+      <Q>
+        <button onClick={click} className="btn btn-outline-dark">
+          {confaq}
+        </button>
+      </Q>
     </Faqq>
   );
 }
 
 export default Faq;
+
+// contact ? (
+
+// ) : (
+//   <UserContact/>
+// );
