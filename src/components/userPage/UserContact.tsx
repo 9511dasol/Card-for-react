@@ -36,6 +36,7 @@ function UserContact() {
 
   const Send = () => {
     console.log(email, name, content);
+    
     Reset();
   };
 

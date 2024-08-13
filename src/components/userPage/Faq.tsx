@@ -3,76 +3,7 @@ import "./Faq.css";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import UserContact from "./UserContact";
-
-interface category {
-  name: string;
-  value: string;
-}
-
-interface qnaList {
-  show: boolean;
-  category: string;
-  question: string;
-  answer: string;
-}
-
-const categories: category[] = [
-  {
-    name: "자주 묻는 질문",
-    value: "all",
-  },
-  {
-    name: "카드 추천 기준",
-    value: "Recommend",
-  },
-  {
-    name: "카테고리 2",
-    value: "category2",
-  },
-  {
-    name: "카테고리 3",
-    value: "category3",
-  },
-];
-
-const qnaLists: qnaList[] = [
-  {
-    show: false,
-    category: "Recommend",
-    question: "카드 추천에 대한 출처가 어디인가요 ?",
-    answer: "특정 커뮤니티입니다.",
-  },
-  {
-    show: false,
-    category: "category2",
-    question: "what is that ? 2!",
-    answer: "this is react. 2!",
-  },
-  {
-    show: false,
-    category: "category3",
-    question: "what is that ? 3!",
-    answer: "this is react. 3!",
-  },
-  {
-    show: false,
-    category: "Recommend",
-    question: "what is that ? 4!",
-    answer: "this is react. 4!",
-  },
-  {
-    show: false,
-    category: "category2",
-    question: "what is that ? 5!",
-    answer: "this is react. 5!",
-  },
-  {
-    show: false,
-    category: "category3",
-    question: "what is that ? 6",
-    answer: "this is react. 6",
-  },
-];
+import { category, qnaList, categories, qnaLists } from "./ingedients";
 
 interface props {
   categories: category[];
@@ -86,6 +17,7 @@ const Faqq = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 90vh;
+  user-select: none;
 `;
 
 const Q = styled.div`
@@ -99,6 +31,15 @@ const Q = styled.div`
 const MinFaq = styled.div`
   min-height: 57vh;
 `;
+
+const CategorySet = styled.div`
+  margin-top: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+
 
 function CategoryFilter({ categories, category, setCatecory }: props) {
   const makeCategories = () => {
@@ -124,7 +65,7 @@ function CategoryFilter({ categories, category, setCatecory }: props) {
 
   return (
     <div>
-      <div className="category-set">{makeCategories()}</div>
+      <CategorySet>{makeCategories()}</CategorySet>
     </div>
   );
 }

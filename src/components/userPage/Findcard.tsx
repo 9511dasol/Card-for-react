@@ -2,24 +2,9 @@ import React, { useState, ChangeEvent } from "react";
 import styled from "styled-components";
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-interface Card_Info {
-  img?: string;
-  timg?: boolean;
-  rotate?: boolean;
-  recommend?: boolean;
-  cardname?: string;
-  mfee?: number;
-  Kmfee?: number;
-  benefits?: string;
-  more?: string;
-  notice1?: string;
-  notice2?: string;
-}
+import { Card_Info, cardinfo, Selector } from "./ingedients";
 
-interface Selector {
-  label: string;
-  value: string;
-}
+
 
 const Findcards = styled.div`
   display: flex;
@@ -133,59 +118,8 @@ function Findcard() {
   const [company, setCompany] = useState<string>("");
   const [pdc, setPdc] = useState<Array<string>>([]);
   const [benefit, setbenefit] = useState<string>("");
-  const [card_info, setCard_info] = useState<Card_Info[]>([
-    // useEffect 데이터 베이스에서 불러올 때 대비
-    {
-      img: "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCreditAXFBZE.png",
-      recommend: true,
-      cardname: "카카오뱅크 신한카드",
-      mfee: 17000,
-      Kmfee: 15000,
-      benefits: "10번 결제당 캐시백, 배달, 택시",
-      more: "https://www.shinhancard.com/pconts/html/card/apply/credit/1196302_2207.html",
-      notice1: "세금 공과금 등",
-      notice2: "상품권",
-    },
-    {
-      img: "https://static11.samsungcard.com/wcms/home/scard/image/personal/IDON_AAP1731.gif",
-      timg: true,
-      recommend: false,
-      cardname: "삼성 ID ON 카드",
-      mfee: 18000,
-      Kmfee: 15000,
-      benefits: "많이 쓰는 영역, 교통 통신 스트리밍, 간편결제",
-      more: "https://www.samsungcard.com/home/card/cardinfo/PGHPPCCCardCardinfoDetails001?code=AAP1731",
-      notice1: "",
-      notice2: "세금 공과금 할인이 적용된 이용금액, 상품권 등",
-    },
-    {
-      img: "https://img1.kbcard.com/ST/img/cxc/kbcard/upload/img/product/09206_img.png",
-      timg: false,
-      recommend: true,
-      rotate: true,
-      cardname: "톡톡 my point 카드",
-      mfee: 12000,
-      Kmfee: 12000,
-      benefits: "국내외 모든 가맹점, KB PAY 5% 적립, 연간리워드 적립",
-      more: "https://card.kbcard.com/CRD/DVIEW/HCAMCXPRICAC0076?mainCC=a&cooperationcode=09206&solicitorcode=7000000001",
-      notice1: "",
-      notice2: "세금 공과금 할인이 적용된 이용금액, 상품권 등",
-    },
-    {
-      img: "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCreditAOBCB6.png",
-      timg: false,
-      recommend: true,
-      rotate: true,
-      cardname: "신한카드 The More(더모아)",
-      mfee: 18000,
-      Kmfee: 15000,
-      benefits: "기본 적립, 특별 적립, 추가 적립, 포인트 재투자",
-      more: "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCreditAOBCB6.png",
-      notice1: "",
-      notice2: "세금 공과금 할인이 적용된 이용금액, 상품권 등",
-    },
-  ]);
-
+  const [card_info, setCard_info] = useState<Card_Info[]>(cardinfo);
+  // setCard_info는 비동기, useEffect async 등 사용할 때를 대비에 useState을 사용함.
   const companyChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setCompany(event.target.value);
   };
