@@ -1,15 +1,63 @@
 import React, { ChangeEvent, useState } from "react";
 import { cardinfo as ci, Card_Info } from "../userPage/ingedients";
-import "./Main.css";
 import styled from "styled-components";
 
 const Img = styled.div`
   display: flex;
   align-items: center;
-
   img {
     max-width: 250px;
   }
+`;
+const Back = styled.div`
+  min-height: 100vh;
+  background-color: #263343;
+`;
+
+const Register = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+const Mypost = styled.div`
+  width: 50%;
+  min-width: 410px;
+  box-shadow: 0px 0px 3px 0px wheat;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+  justify-content: space-between;
+`;
+const Buttons = styled.div`
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+  align-items: center;
+`;
+const Cardlist = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: white;
+  padding: 20px;
+`;
+const Cards = styled.div`
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid wheat;
+  padding: 20px;
+`;
+const CardInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+`;
+const Cardbutton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 function Main() {
@@ -95,14 +143,14 @@ function Main() {
 
   const del_card = () => {
     // setCard_info((prev) => prev.filter(v => v.innate__num !==innate));
-    setCard_info(prev => prev.filter(v => v.innate__num !== innate));
+    setCard_info((prev) => prev.filter((v) => v.innate__num !== innate));
     setInnate("");
-  }
+  };
 
   return (
-    <div className="back">
-      <div className="register">
-        <div className="mypost">
+    <Back>
+      <Register>
+        <Mypost>
           <div className="input-group mb-3">
             <label className="input-group-text" htmlFor="inputGroupSelect01">
               개발자 추천
@@ -287,29 +335,55 @@ function Main() {
             />
             <label htmlFor="floatingInput">카드 고유 번호</label>
           </div>
-          <div className="buttons">
-            <button type="button" onClick={()=>alert("백엔드 구현중")} className="btn btn-dark">
+          <Buttons>
+            <button
+              type="button"
+              onClick={() => alert("백엔드 구현중")}
+              className="btn btn-dark"
+            >
               URL 조회
             </button>
-            <button type="button" onClick={()=>alert("구축중")} className="btn btn-dark">
+            <button
+              type="button"
+              onClick={() => alert("구축중")}
+              className="btn btn-dark"
+            >
               카드 조회
             </button>
-            <button type="button" onClick={()=>alert("데이터 베이스 미연결")} className="btn btn-dark">
+            <button
+              type="button"
+              onClick={() => alert("데이터 베이스 미연결")}
+              className="btn btn-dark"
+            >
               카드 등록
             </button>
-            <button type="button" onClick={()=>alert("구축중")} className="btn btn-dark">
+            <button
+              type="button"
+              onClick={() => alert("구축중")}
+              className="btn btn-dark"
+            >
               카드 수정
             </button>
-            <button type="button" onClick={()=> innate? del_card(): alert("고유번호를 확인해주세요")} className="btn btn-dark">
+            <button
+              type="button"
+              onClick={() =>
+                innate ? del_card() : alert("고유번호를 확인해주세요")
+              }
+              className="btn btn-dark"
+            >
               카드 삭제
             </button>
-            <button type="button" onClick={()=>alert("구축중")} className="btn btn-dark">
+            <button
+              type="button"
+              onClick={() => alert("구축중")}
+              className="btn btn-dark"
+            >
               불러오기
             </button>
-          </div>
-        </div>
-      </div>
-      <div className="card__list">
+          </Buttons>
+        </Mypost>
+      </Register>
+      <Cardlist>
         {card_info.map(
           (
             {
@@ -328,7 +402,7 @@ function Main() {
             },
             idx
           ) => (
-            <div className="cards" key={idx}>
+            <Cards key={idx}>
               {timg ? (
                 <Img style={{ marginLeft: "50px" }}>
                   <img style={{ height: "190px" }} src={img} />
@@ -347,7 +421,7 @@ function Main() {
                   <img src={img} />
                 </Img>
               )}
-              <div className="card__info">
+              <CardInfo>
                 <h5>{cardname}</h5>
                 <p>
                   해외: {mfee}, 국내: {Kmfee}
@@ -356,19 +430,23 @@ function Main() {
                 <p>{benefits}</p>
                 <p>전월 이용금액 포함: {notice1}</p>
                 <p>전월 이용금액 미포함: {notice2}</p>
-              </div>
-              <div className="card__button">
-                <button type="button" onClick={()=>{
-                  setInnate(innate__num ?? '');
-                }} className="btn btn-dark">
+              </CardInfo>
+              <Cardbutton>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setInnate(innate__num ?? "");
+                  }}
+                  className="btn btn-dark"
+                >
                   불러오기
                 </button>
-              </div>
-            </div>
+              </Cardbutton>
+            </Cards>
           )
         )}
-      </div>
-    </div>
+      </Cardlist>
+    </Back>
   );
 }
 

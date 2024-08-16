@@ -14,10 +14,12 @@ const Home = styled.div`
   height: 100%;
 `;
 
-const Navbars = styled.div``;
+const Navbars = styled.div`
+`;
 
 const Content = styled.div`
   min-height: 90vh;
+  background-color: #263343;
 `;
 
 const Footer = styled.div`
@@ -88,17 +90,18 @@ function Homepage() {
                 <Link to={"/"}>Home</Link>
               </li>
               <li>
-                <a href="#">인기카드</a>
+              <Link to={"/famouscard"}>인기 카드</Link>
               </li>
               <li>
-                <Link to={"findcard"}>카드 찾기</Link>
+                <Link to={"/findcard"}>카드 찾기</Link>
               </li>
               <li>
-                <a href="#">개발자 카드 추천</a>
+              {/* <Link to={"/findcard"}>개발자 카드 추천</Link> */}
+                <a style={{cursor:"pointer"}} onClick={()=>alert("준비중")}> 개발자 카드 추천</a>
               </li>
               <li>
-                <a href="#">FAQ</a>
-              </li>
+                <Link to={"/faq"}>FAQ</Link>
+                </li>
             </ul>
           </Footer_menu>
         </Footer__ma>
