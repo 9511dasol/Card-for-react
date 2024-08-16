@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import "boxicons/css/boxicons.min.css";
 import { Link } from "react-router-dom";
@@ -49,13 +49,13 @@ const Unav__contact = styled.div`
     }
   }
 `;
-function Unavbar() {
+function Unavbar({ onclick }: { onclick: Dispatch<SetStateAction<boolean>> }) {
   return (
     <Unav>
       <Unav__logo>
         <Link to={"/"}>
           <i className="bx bxs-credit-card bx-sm bx-tada-hover" />
-          <span style={{ fontSize: "18px" }}>Card</span>
+          <span style={{ fontSize: "18px" }}>Manager</span>
         </Link>
       </Unav__logo>
       <Unav__menu>
@@ -75,8 +75,8 @@ function Unavbar() {
       <Unav__contact>
         <ul>
           <li>
-            <a onClick={() => alert("공사중")} href="#">
-              <i className="bx bxs-key bx-sm"></i>
+            <a onClick={() => onclick(false)} href="#">
+              <i className="bx bxs-key bx-sm" />
             </a>
           </li>
           <li>

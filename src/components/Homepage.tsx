@@ -61,11 +61,12 @@ const Footer_menu = styled.div`
   }
 `;
 
-function Homepage() {
+function Homepage() { 
+  const [state, setState] = useState<boolean>(true);
   return (
     <div className="home">
       <Navbars>
-        <Unavbar />
+        {state ? <Unavbar onclick={setState}/>: <Navbar onclick={setState}/>}
       </Navbars>
       <Content>
         <Outlet />

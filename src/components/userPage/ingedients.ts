@@ -10,6 +10,7 @@ export interface Card_Info {
     more?: string;
     notice1?: string;
     notice2?: string;
+    innate__num?: string;
 }
 
 export interface Selector {
@@ -41,6 +42,8 @@ export const cardinfo: Card_Info[] = [
         more: "https://www.shinhancard.com/pconts/html/card/apply/credit/1196302_2207.html",
         notice1: "세금 공과금 등",
         notice2: "상품권",
+        innate__num: "1",
+
     },
     {
         img: "https://static11.samsungcard.com/wcms/home/scard/image/personal/IDON_AAP1731.gif",
@@ -53,6 +56,7 @@ export const cardinfo: Card_Info[] = [
         more: "https://www.samsungcard.com/home/card/cardinfo/PGHPPCCCardCardinfoDetails001?code=AAP1731",
         notice1: "",
         notice2: "세금 공과금 할인이 적용된 이용금액, 상품권 등",
+        innate__num: "2",
     },
     {
         img: "https://img1.kbcard.com/ST/img/cxc/kbcard/upload/img/product/09206_img.png",
@@ -66,6 +70,7 @@ export const cardinfo: Card_Info[] = [
         more: "https://card.kbcard.com/CRD/DVIEW/HCAMCXPRICAC0076?mainCC=a&cooperationcode=09206&solicitorcode=7000000001",
         notice1: "",
         notice2: "세금 공과금 할인이 적용된 이용금액, 상품권 등",
+        innate__num: "3",
     },
     {
         img: "https://www.shinhancard.com/pconts/images/contents/card/plate/cdCreditAOBCB6.png",
@@ -79,6 +84,7 @@ export const cardinfo: Card_Info[] = [
         more: "https://www.shinhancard.com/pconts/html/card/apply/credit/1198942_2207.html",
         notice1: "",
         notice2: "세금 공과금 할인이 적용된 이용금액, 상품권 등",
+        innate__num: "4",
     },
 ]
 

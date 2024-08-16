@@ -68,7 +68,7 @@ const Information = styled.div<Card_Info>`
   flex-direction: column;
   width: 390px;
   height: 100%;
-  ${(props) => (props.timg ? "margin: 10px 0 0 70px;" : null)}
+  ${({timg}) => (timg ? "margin: 10px 0 0 70px;" : null)}
   strong {
     margin-bottom: 5px;
     text-align: center;
@@ -146,11 +146,11 @@ function Findcard() {
             onChange={companyChange}
             value={company}
           >
-            <option selected value="">
+            <option value={""}>
               전체
             </option>
-            {companies.map((v) => (
-              <option value={v.value}>{v.label}</option>
+            {companies.map((v, idx) => (
+              <option key={idx} value={v.value}>{v.label}</option>
             ))}
           </select>
         </Select>
@@ -161,17 +161,17 @@ function Findcard() {
             onChange={benefitChange}
             value={benefit}
           >
-            <option selected value="">
+            <option value={""}>
               전체
             </option>
-            {benefits.map((v) => (
-              <option value={v.value}>{v.label}</option>
+            {benefits.map((v, idx) => (
+              <option key={idx} value={v.value}>{v.label}</option>
             ))}
           </select>
         </Select>
         <Select style={{ justifyContent: "space-around" }}>
-          {PD.map((v) => (
-            <label key={v.value}>
+          {PD.map((v, idx) => (
+            <label key={idx} >
               <input
                 type="checkbox"
                 value={v.value}
