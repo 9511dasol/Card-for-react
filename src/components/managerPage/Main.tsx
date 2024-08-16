@@ -27,7 +27,7 @@ function Main() {
   const [cautions, setCautions] = useState<Array<string>>([]);
   const [example, setExample] = useState<string>();
   const [mf, setMf] = useState<number>();
-  const [innate, setInnate] = useState<string>();
+  const [innate, setInnate] = useState<string>("");
   const [card_info, setCard_info] = useState<Card_Info[]>(ci);
   const RecommendChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setRecommend(event.target.value);
@@ -95,7 +95,8 @@ function Main() {
 
   const del_card = () => {
     // setCard_info((prev) => prev.filter(v => v.innate__num !==innate));
-    console.log(innate);
+    setCard_info(prev => prev.filter(v => v.innate__num !== innate));
+    setInnate("");
   }
 
   return (
@@ -277,7 +278,7 @@ function Main() {
           </div>
           <div className="form-floating mb-3">
             <input
-              type="number"
+              type="text"
               className="form-control"
               id="innate_number"
               placeholder="url"
@@ -299,7 +300,7 @@ function Main() {
             <button type="button" onClick={()=>alert("구축중")} className="btn btn-dark">
               카드 수정
             </button>
-            <button type="button" onClick={()=>del_card} className="btn btn-dark">
+            <button type="button" onClick={()=> innate? del_card(): alert("고유번호를 확인해주세요")} className="btn btn-dark">
               카드 삭제
             </button>
             <button type="button" onClick={()=>alert("구축중")} className="btn btn-dark">
@@ -358,7 +359,7 @@ function Main() {
               </div>
               <div className="card__button">
                 <button type="button" onClick={()=>{
-                  setInnate(innate__num);
+                  setInnate(innate__num ?? '');
                 }} className="btn btn-dark">
                   불러오기
                 </button>

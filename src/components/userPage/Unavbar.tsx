@@ -49,6 +49,15 @@ const Unav__contact = styled.div`
     }
   }
 `;
+
+const Button = styled.button`
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background: transparent;
+  color: white;
+`;
+
 function Unavbar({ onclick }: { onclick: Dispatch<SetStateAction<boolean>> }) {
   return (
     <Unav>
@@ -75,9 +84,9 @@ function Unavbar({ onclick }: { onclick: Dispatch<SetStateAction<boolean>> }) {
       <Unav__contact>
         <ul>
           <li>
-            <a onClick={() => onclick(false)} href="#">
+            <Button onClick={() => onclick(false)}>
               <i className="bx bxs-key bx-sm" />
-            </a>
+            </Button>
           </li>
           <li>
             <a href="https://github.com/9511dasol">
