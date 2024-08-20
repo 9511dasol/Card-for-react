@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent } from "react";
 import styled from "styled-components";
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card_Info, cardinfo, Selector } from "./ingedients";
+import { Card_Info, cardinfo, Selector } from "../ingedients";
 
 
 
@@ -52,6 +52,7 @@ const Card = styled.div`
   padding: 20px 0;
   margin: 10px;
   height: 100%;
+  color: white;
 `;
 
 const Img = styled.div`

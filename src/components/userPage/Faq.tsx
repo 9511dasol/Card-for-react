@@ -1,9 +1,8 @@
 import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
 import "./Faq.css";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import UserContact from "./UserContact";
-import { category, qnaList, categories, qnaLists } from "./ingedients";
+import { category, qnaList, categories, qnaLists } from "../ingedients";
 
 interface props {
   categories: category[];
@@ -39,7 +38,46 @@ const CategorySet = styled.div`
   align-items: center;
 `;
 
+const FaqCard = styled.div`
+  display: flex;
+  margin-top: 10px;
+  width: 100%;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  border: 1px solid black;
+  border-radius: 20px;
+  flex-direction: column;
+  color: white;
+`;
 
+const FaqCardTitle = styled.div`
+  display: flex;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  align-items: center;
+  cursor: pointer;
+`;
+const QuestionMark = styled.span`
+  color: rgb(12, 77, 162);
+  font-size: 20px;
+  margin-right: 10px;
+`;
+
+const AnswerMark = styled.span`
+  color: skyblue;
+  font-size: 20px;
+  margin-right: 10px;
+`;
+
+const FaqParent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const FaqList = styled.div`
+  width: 80%;
+`;
 
 function CategoryFilter({ categories, category, setCatecory }: props) {
   const makeCategories = () => {
@@ -92,18 +130,17 @@ function Faq() {
 
   const getQnACard = (item: qnaList, index: number) => {
     return (
-      <div className="faq-card" key={index}>
-        <div
-          className="faq-card-title"
+      <FaqCard key={index}>
+        <FaqCardTitle
           onClick={() => {
             let temp = [...list];
             temp[index].show = !temp[index].show;
             SetList([...temp]);
           }}
         >
-          <span className="question-mark">Q.</span>
+          <QuestionMark>Q.</QuestionMark>
           <span>{item.question}</span>
-        </div>
+        </FaqCardTitle>
         <div
           className={
             list[index].show
@@ -111,10 +148,10 @@ function Faq() {
               : "faq-card-answer faq-card-none"
           }
         >
-          <span className="answer-mark">A.</span>
+          <AnswerMark>A.</AnswerMark>
           <span className="FAQ-card-answer">{item.answer}</span>
         </div>
-      </div>
+      </FaqCard>
     );
   };
 
@@ -128,11 +165,11 @@ function Faq() {
             setCatecory={setCatecory}
           />
           {/* 카테고리 만들기 */}
-          <div className="fqa-parent">
-            <div className="faq-list">
+          <FaqParent>
+            <FaqList>
               {list.map((item, index) => getQnACard(item, index))}
-            </div>
-          </div>
+            </FaqList>
+          </FaqParent>
           {/* 질문 리스트 만듥 */}
         </MinFaq>
       ) : (

@@ -64,7 +64,7 @@ function Navbar({ onclick }: { onclick: Dispatch<SetStateAction<boolean>> }) {
       <Unav__logo>
         <Link to={"/"}>
           <i className="bx bxs-credit-card bx-sm bx-tada-hover" />
-          <span style={{ fontSize: "18px" }}>Card</span>
+          <span style={{ fontSize: "18px" }}>Manager</span>
         </Link>
       </Unav__logo>
       <Unav__menu>
@@ -78,7 +78,6 @@ function Navbar({ onclick }: { onclick: Dispatch<SetStateAction<boolean>> }) {
           <li>
             <Link to={"/managerfaq"}>FAQ</Link>
           </li>
-          <li onClick={() => alert("개발중")}>FAQ</li>
         </ul>
       </Unav__menu>
       <Unav__contact>

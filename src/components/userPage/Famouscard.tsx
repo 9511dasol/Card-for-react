@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Card_Info, cardinfo } from "./ingedients";
+import { Card_Info, cardinfo } from "../ingedients";
 
 interface Company {
   name?: string;

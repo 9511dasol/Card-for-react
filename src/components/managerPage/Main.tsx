@@ -1,7 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
-import { cardinfo as ci, Card_Info } from "../userPage/ingedients";
+import { cardinfo as ci, Card_Info } from "../ingedients";
 import styled from "styled-components";
-
 const Img = styled.div`
   display: flex;
   align-items: center;
