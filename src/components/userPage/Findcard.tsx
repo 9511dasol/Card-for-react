@@ -22,6 +22,7 @@ const Selects = styled.div`
   max-width: 500px;
   justify-content: center;
   padding: 40px;
+  color: white;
 `;
 
 const Select = styled.div`
