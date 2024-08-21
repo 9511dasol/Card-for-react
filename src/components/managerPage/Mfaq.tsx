@@ -1,13 +1,19 @@
-import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
+import React, {
+  useEffect,
+  useState,
+  Dispatch,
+  SetStateAction,
+  ChangeEvent,
+} from "react";
 import styled from "styled-components";
 import { category, qnaList, categories, qnaLists } from "../ingedients";
 import "./Mfaq.css";
-
+import Modal from "react-modal";
 interface props {
   categories: category[];
   category: string;
   setCatecory: Dispatch<SetStateAction<string>>;
-  SetList: Dispatch<SetStateAction<qnaList[]>>;
+  setTempp: Dispatch<SetStateAction<qnaList[]>>;
 }
 
 const LS_KEY_CATEGORY = "LS_KEY_CATEGORY";
@@ -76,7 +82,7 @@ const Create = styled.div`
   position: absolute;
   top: 0;
   right: 200px;
-  button{
+  button {
     font-size: 20px;
     background: transparent;
     color: white;
@@ -86,7 +92,54 @@ const Create = styled.div`
   }
 `;
 
-function CategoryFilter({ categories, category, setCatecory }: props) {
+const ModalBtn = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+
+  button {
+    outline: none;
+    border: none;
+    background: transparent;
+  }
+  button:hover {
+    background: rgba(255, 255, 255, 0.152);
+  }
+`;
+
+const Modalclose = styled.button`
+  outline: none;
+  border: none;
+  position: absolute;
+  right: 15px;
+  background: transparent;
+  top: 7px;
+`;
+
+const Form = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-item: center;
+  justify-content: center;
+  height: 100%;
+`;
+
+const Select = styled.div`
+  display: flex;
+  width: 100%;
+  margin: 5px 0;
+`;
+
+function CategoryFilter({
+  categories,
+  category,
+  setCatecory,
+  setTempp,
+}: props) {
+  const [modalIsOpen, setModalIs] = useState<boolean>(false);
+  const [cate, Setcate] = useState<string>();
+  const [q, setQ] = useState<string>();
+  const [a, setA] = useState<string>();
+
   const makeCategories = () => {
     return categories.map((item, idx) => (
       <div
@@ -108,29 +161,134 @@ function CategoryFilter({ categories, category, setCatecory }: props) {
 
   useEffect(init, []);
 
+  const addFaq = () => {
+    if (cate && q && a) {
+      setTempp((prev) => {
+        Setcate("");
+        setA("");
+        setQ("");
+        setModalIs((prev) => !prev);
+        return [
+          ...prev,
+          {
+            show: false,
+            category: cate as string,
+            question: q as string,
+            answer: a as string,
+          },
+        ];
+      });
+    } else {
+      alert("입력란을 확인해세요");
+    }
+  };
+  const refresh = () => {
+    Setcate("");
+    setA("");
+    setQ("");
+  };
+  const categoryChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    Setcate(event.target.value);
+  };
+
   return (
     <CategorySet>
       {makeCategories()}
       <Create>
-        <button onClick={() => alert("공사중")}>+</button>
+        <button onClick={() => setModalIs(true)}>+</button>
       </Create>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setModalIs(false)}
+        contentLabel="Example Modal"
+        style={{
+          content: {
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            background: "darkgray",
+          },
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.75)",
+          },
+        }}
+      >
+        <Modalclose onClick={() => setModalIs((prev) => !prev)}>x</Modalclose>
+        <h2 style={{textAlign: "center", marginTop: "1px"}}>FAQ 등록하기</h2>
+        <Form>
+          <Select>
+            <label className="input-group-text">카테고리</label>
+            <select
+              className="form-select"
+              onChange={categoryChange}
+              value={cate}
+            >
+              <option value={""}>전체</option>
+              {categories.map(({ name, value }, idx) =>
+                value !== "all" ? (
+                  <option key={idx} value={value}>
+                    {name}
+                  </option>
+                ) : null
+              )}
+            </select>
+          </Select>
+
+          <Select className="form-floating">
+            <input
+              type="text"
+              className="form-control"
+              id="card_name"
+              placeholder="url"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+            />
+            <label htmlFor="floatingInput">Question</label>
+          </Select>
+          <Select className="form-floating">
+            <textarea
+              className="form-control"
+              placeholder="Leave Notices here"
+              id="Notice"
+              style={{ height: "100px" }}
+              value={a}
+              onChange={(e) => setA(e.target.value)}
+            />
+            <label htmlFor="floatingTextarea2">Answer</label>
+          </Select>
+        </Form>
+        <ModalBtn>
+          <button onClick={addFaq}>새로 만들기</button>
+          <button onClick={refresh}>초기화</button>
+        </ModalBtn>
+      </Modal>
     </CategorySet>
   );
 }
 
+Modal.setAppElement("#root");
+
 function Mfaq() {
   const [category, setCatecory] = useState<string>("all");
-  const [list, SetList] = useState<qnaList[]>(qnaLists);
-
+  const [list, setList] = useState<qnaList[]>(qnaLists); // 보여주기
+  const [tempp, setTempp] = useState<qnaList[]>(list); // 초기 설정, 데이터베이스 설정, 가변 가능
   useEffect(() => {
-    SetList(
-      qnaLists.filter((item) => {
-        if (category === "all") return true;
-        if (category === item.category) return true;
-        return false;
+    // 보여주기
+    setList(
+      tempp.filter((item) => {
+        if (category === "all") {
+          return true;
+        } else if (category === item.category) {
+          return true;
+        } else {
+          return false;
+        }
       })
     );
-  }, [category]);
+  }, [category, tempp]);
 
   const getQnACard = (item: qnaList, index: number) => {
     return (
@@ -139,7 +297,7 @@ function Mfaq() {
           onClick={() => {
             let temp = [...list];
             temp[index].show = !temp[index].show;
-            SetList([...temp]);
+            setList([...temp]);
           }}
         >
           <QuestionMark>Q.</QuestionMark>
@@ -166,7 +324,7 @@ function Mfaq() {
           categories={categories}
           category={category}
           setCatecory={setCatecory}
-          SetList={SetList}
+          setTempp={setTempp}
         />
         {/* 카테고리 만들기 */}
         <FaqParent>
