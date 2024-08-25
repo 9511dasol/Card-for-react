@@ -21,6 +21,9 @@ const Mybtns = styled.div`
   justify-content: center;
   align-items: center;
   height: 100px;
+  button {
+    margin: 5px;
+  }
 `;
 
 function UserContact() {
@@ -35,8 +38,12 @@ function UserContact() {
   };
 
   const Send = () => {
-    console.log(email, name, content);
-    
+    if (email && name && content) {
+      console.log(email, name, content);
+    } else {
+      alert("다시 확인하세요.");
+    }
+
     Reset();
   };
 
@@ -80,7 +87,7 @@ function UserContact() {
           <button type="button" onClick={Send} className="btn btn-dark">
             보내기
           </button>
-          <button type="button" onClick={Reset} className="btn btn-outline-dark">
+          <button type="button" onClick={Reset} className="btn btn-dark">
             초기화
           </button>
         </Mybtns>

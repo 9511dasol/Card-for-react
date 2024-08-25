@@ -25,6 +25,9 @@ const Q = styled.div`
   align-items: center;
   min-height: 33.9vh;
   width: 100%;
+  button {
+    color: white;
+  }
 `;
 
 const MinFaq = styled.div`
@@ -114,10 +117,6 @@ function Faq() {
   const [contact, SetContact] = useState<boolean>(true);
   const [confaq, Setconfaq] = useState<string>("1:1 문의하기");
 
-  const click = () => {
-    SetContact(!contact);
-    Setconfaq(() => (contact ? "1:1 문의하기" : "FAQ"));
-  };
   useEffect(() => {
     SetList(
       qnaLists.filter((item) => {
@@ -177,7 +176,13 @@ function Faq() {
       )}
 
       <Q>
-        <button onClick={click} className="btn btn-outline-dark">
+        <button
+          onClick={() => {
+            SetContact(!contact);
+            Setconfaq(() => (!contact ? "1:1 문의하기" : "FAQ"));
+          }}
+          className="btn btn-outline-dark"
+        >
           {confaq}
         </button>
       </Q>
