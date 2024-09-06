@@ -2,6 +2,12 @@ import React, { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import "boxicons/css/boxicons.min.css";
 import { Link } from "react-router-dom";
+
+interface Props {
+  onclick: Dispatch<SetStateAction<boolean>>;
+  setMenu: Dispatch<SetStateAction<boolean>>;
+}
+
 const Unav = styled.div`
   display: flex;
   flex-direction: row;
@@ -24,6 +30,9 @@ const Unav__logo = styled.div`
   span {
     margin: 0 0 0px 5px;
   }
+  @media screen and (max-width: 690px) {
+    display: none;
+  }
 `;
 
 const Unav__menu = styled.div`
@@ -35,6 +44,9 @@ const Unav__menu = styled.div`
       margin: 0 10px;
       cursor: pointer;
     }
+  }
+  @media screen and (max-width: 690px) {
+    display: none;
   }
 `;
 const Unav__contact = styled.div`
@@ -57,26 +69,47 @@ const Button = styled.button`
   color: white;
   padding: 0;
   margin: 0;
+  display: flex;
 `;
-function Navbar({ onclick }: { onclick: Dispatch<SetStateAction<boolean>> }) {
+
+const Unav__Hambergur = styled.div`
+  display: none;
+  @media screen and (max-width: 690px) {
+    display: flex;
+    span {
+      display: flex;
+      margin: 0 0 0px 5px;
+    }
+  }
+`;
+
+function Navbar({ onclick, setMenu }: Props) {
   return (
     <Unav>
+      <Unav__Hambergur>
+        <Button onClick={() => setMenu((prev) => true)}>
+          <i className="bx bx-menu bx-sm" />
+        </Button>
+        <span style={{ fontSize: "18px" }}>Manager</span>
+      </Unav__Hambergur>
       <Unav__logo>
-        <Link to={"/"}>
+        <Button onClick={() => setMenu((prev) => true)}>
           <i className="bx bxs-credit-card bx-sm bx-tada-hover" />
+        </Button>
+        <Link to={"/"}>
           <span style={{ fontSize: "18px" }}>Manager</span>
         </Link>
       </Unav__logo>
       <Unav__menu>
         <ul>
           <li>
-            <Link to={"/managermain"}>카드 등록</Link>
+            <Link to={"/manager/main"}>카드 등록</Link>
           </li>
           <li>
-            <Link to={"/managercontact"}>1:1 문의</Link>
+            <Link to={"/manager/contact"}>1:1 문의</Link>
           </li>
           <li>
-            <Link to={"/managerfaq"}>FAQ</Link>
+            <Link to={"/manager/faq"}>FAQ</Link>
           </li>
         </ul>
       </Unav__menu>

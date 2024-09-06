@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Unavbar from "./userPage/Unavbar";
 import Usermain from "./userPage/Usermain";
@@ -7,6 +7,7 @@ import Navbar from "./managerPage/Navbar";
 import Findcard from "./userPage/Findcard";
 import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Modal from "react-modal";
 
 const Home = styled.div`
   display: flex;
@@ -14,8 +15,7 @@ const Home = styled.div`
   height: 100%;
 `;
 
-const Navbars = styled.div`
-`;
+const Navbars = styled.div``;
 
 const Content = styled.div`
   min-height: 90vh;
@@ -31,6 +31,9 @@ const Footer = styled.div`
   background-color: #263343;
   color: #fff;
   padding: 25px 0 0 0;
+  @media screen and (max-width: 690px) {
+    justify-content: space-between;
+  }
 `;
 
 const Footer__ma = styled.div`
@@ -63,15 +66,68 @@ const Footer_menu = styled.div`
   }
 `;
 
-function Homepage() { 
+const Unav__menu = styled.div`
+  ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    li {
+      margin: 0 10px;
+      cursor: pointer;
+    }
+  }
+`;
+
+const Mage__menu = styled.div`
+  ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    li {
+      margin: 0 10px;
+      cursor: pointer;
+    }
+  }
+`;
+
+function Homepage() {
   const [state, setState] = useState<boolean>(true);
+  const [menu, setMenu] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 690) {
+        setMenu(false);
+      }
+    };
+
+    // 처음 로드 시 한 번 실행
+    handleResize();
+
+    // 윈도우 리사이즈 이벤트에 핸들러를 추가
+    window.addEventListener('resize', handleResize);
+
+    // 컴포넌트 언마운트 시 이벤트 리스너 제거
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
-    <div className="home">
+    <Home>
       <Navbars>
-        {state ? <Unavbar onclick={setState}/>: <Navbar onclick={setState}/>}
+        {state ? (
+          <Unavbar onclick={setState} setMenu={setMenu} />
+        ) : (
+          <Navbar onclick={setState} setMenu={setMenu} />
+        )}
       </Navbars>
-      <Content>
-        <Outlet />
+      <Content >
+        {menu? <></>:<Outlet />}
       </Content>
       <Footer>
         <Footer__ma>
@@ -90,18 +146,24 @@ function Homepage() {
                 <Link to={"/"}>Home</Link>
               </li>
               <li>
-              <Link to={"/famouscard"}>인기 카드</Link>
+                <Link to={"/famouscard"}>인기 카드</Link>
               </li>
               <li>
                 <Link to={"/findcard"}>카드 찾기</Link>
               </li>
               <li>
-              {/* <Link to={"/findcard"}>개발자 카드 추천</Link> */}
-                <a style={{cursor:"pointer"}} onClick={()=>alert("준비중")}> 개발자 카드 추천</a>
+                {/* <Link to={"/findcard"}>개발자 카드 추천</Link> */}
+                <a
+                  style={{ cursor: "pointer" }}
+                  onClick={() => alert("준비중")}
+                >
+                  {" "}
+                  개발자 카드 추천
+                </a>
               </li>
               <li>
                 <Link to={"/faq"}>FAQ</Link>
-                </li>
+              </li>
             </ul>
           </Footer_menu>
         </Footer__ma>
@@ -115,7 +177,39 @@ function Homepage() {
           </Footer_menu>
         </Footer__ma>
       </Footer>
-    </div>
+      <Modal isOpen={menu} onRequestClose={() => setMenu(false)}>
+        {state ? (
+          <Unav__menu>
+            <ul>
+              <li>
+                <Link onClick={() => setMenu(false)} to={"/famouscard"}>인기카드</Link>
+              </li>
+              <li>
+                <Link onClick={() => setMenu(false)} to={"/Findcard"}>카드 찾기</Link>
+              </li>
+              <li onClick={() => alert("개발중")}>개발자 카드 추천</li>
+              <li>
+                <Link onClick={() => setMenu(false)} to={"/faq"}>FAQ</Link>
+              </li>
+            </ul>
+          </Unav__menu>
+        ) : (
+          <Mage__menu>
+            <ul>
+              <li>
+                <Link onClick={() => setMenu(false)} to={"/manager/main"}>카드 등록</Link>
+              </li>
+              <li>
+                <Link onClick={() => setMenu(false)} to={"/manager/contact"}>1:1 문의</Link>
+              </li>
+              <li>
+                <Link onClick={() => setMenu(false)} to={"/manager/faq"}>FAQ</Link>
+              </li>
+            </ul>
+          </Mage__menu>
+        )}
+      </Modal>
+    </Home>
   );
 }
 

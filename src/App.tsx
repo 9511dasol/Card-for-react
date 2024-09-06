@@ -27,9 +27,9 @@ function App() {
           <Route path="/faq" element={<Faq />} />
           <Route path="/famouscard" element={<Famouscard />} />
           {/* 관리잠 모드 */}
-          <Route path="/managermain" element={<Main />} />
-          <Route path="/managercontact" element={<Contact />} />
-          <Route path="/managerfaq" element={<Mfaq />} />
+          <Route path="/manager/main" element={<Main />} />
+          <Route path="/manager/contact" element={<Contact />} />
+          <Route path="/manager/faq" element={<Mfaq />} />
         </Route>
       </Routes>
     </Router>
