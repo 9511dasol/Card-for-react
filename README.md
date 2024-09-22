@@ -24,6 +24,7 @@
 
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
 ## 주요 기능 📌
 - 텐서플로우를 이용한 자연어 처리 모델 개발 - 특정 커뮤니티에 올라오는 게시글 댓글 학습
